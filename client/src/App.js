@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import Wrapper from "./wrappers/LandingPage"
 import {TodoWrapper} from "./wrappers/Form"
@@ -9,8 +9,11 @@ import { TodoMapWrapper } from "./wrappers/TodoMap"
 import TodoBottom from './components/TodoBottom';
 import Input from './components/Input';
 import Layout from './Layout/Layout';
+import axios from "axios"
 
 function App() {
+
+
   const {themeBoolean, size} = useContext(ThemeContext)
   const [inputValue, setInputValue] = useState("")
   const [todos, setTodos] = useState([])
@@ -18,6 +21,7 @@ function App() {
   const handleChange = (event) => {
     setInputValue(event.target.value)
   }
+
 
   const handleSubmit = (event) => {
     event.preventDefault()

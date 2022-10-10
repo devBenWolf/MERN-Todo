@@ -20,40 +20,32 @@ export const Wrapper = styled.main`
         border-top: 3px solid #00d4ff;
         font-size: 12px;
 
-
-        @media(min-width: 400px) {
-            width: 300px;
-        }
-
         @media(min-width: 600px) {
             width: 400px;
         }
-
-        @media (min-width: 750px) {
-            width: 450px;
-            font-size: 14px;
-        }
     }
+
 
     label {
         display: flex;
         flex-direction: column;
         font-weight: bold;
-    }
-
-    
+        font-size: 14px;
+    }  
 
     input {
         padding: 0.2rem;
-        bordeR: none;
+        border: none;
         border-radius: 3px;
-        margin-top: 0.6rem;
+        margin-top: 0.5rem;
         height: 2.5rem;
-        width: 100%;
+        width: 300px;
+        border: 1px solid #00d4ff;
     }
 
     input:focus {
-        border: 1px solid #00d4ff;
+        border: 1px solid purple;
+
     }
 
     h3 {
@@ -67,12 +59,15 @@ export const Wrapper = styled.main`
     }
 
     div >* {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .input-container {
         height: 90%;
         width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .input-container  {
@@ -82,14 +77,18 @@ export const Wrapper = styled.main`
     }
 
     .submit-btn {
-        padding: 0.2rem 1rem;
+        padding: 0.5rem 2rem;
         border: none;
         border-radius: 3px;
         cursor: pointer;
+        background-color: #00d4ff;
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 0.1rem;
     }
 
     .submit-btn:hover {
-        background: #00d4ff;
+        background-color: hsl(190, 100%, 30%);
         color: white;
         font-weight: bold;
     }

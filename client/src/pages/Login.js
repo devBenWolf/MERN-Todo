@@ -1,23 +1,32 @@
-import {useState, useEffect} from "react"
+import {useEffect, useState} from "react"
 import Alert from "../components/Alert"
 import { useLoginContext } from "../context/loginContext"
 import Input from "../components/Input"
 import { Wrapper } from "../wrappers/Login"
+import {useNavigate} from "react-router-dom"
 
 
 const initialState = {
     name: '',
     email: '',
     password: '',
-    isMember: true
+    isMember: false,
 }
 
 
 const Login = () => {
-    const {isLoading, showAlert, displayAlert} = useLoginContext()
+    const {isLoading, showAlert, displayAlert, handleUser, user} = useLoginContext()
     const [values, setValues] = useState(initialState)
 
-    console.log(showAlert)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (user) {
+            setTimeout(() => {
+                NavigationPreloadManager("/")
+            }, 2000)
+        }
+    }, [user, navigate])
 
     const handleChange = (event) => {
         const {name, value} = event.target
@@ -25,19 +34,25 @@ const Login = () => {
             ...values,
             [name]: value
         })
+        console.log(values)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
         const {name, email, password, isMember} = values
-        
         if (!email || !password || (!isMember && !name)) {
-            displayAlert()            
-        }       
-    }
+          displayAlert()
+        }
+        const currentUser = {name, email, password}
+        if (isMember) {
+          handleUser({currentUser, endPoint: "login", alertText: "User Logged In. Redirecting..."})
+        } else {
+            handleUser({currentUser, endPoint: "register", alertText: "User Created. Redirecting..."})
+        }
+      }
 
     const toggleMember = () => {
-        setValues({...values, isMember: !values.isMember})
+        setValues({...values, isMember: !values.isMember, name: ""})
     }
 
 
@@ -45,24 +60,24 @@ const Login = () => {
   return (
     <Wrapper>
     <form onSubmit = {handleSubmit}>  
-            <h3>{!values.isMember ? "Login": "Register"}</h3>
+            <h3>{values.isMember ? "Login": "Register"}</h3>
             {showAlert && <Alert />}
-            <div
-                className = "input-container"
-            >{ values.isMember &&
-                    <Input 
-                        type            = "text"
-                        name            = "name"
-                        value           = {values.name}
-                        handleChange    =  {handleChange}
-                        placeholder     = "Please enter name"
-                    />
-                }
+            <div className = "input-container">
+            { !values.isMember && (
+                <Input 
+                    type            = "text"
+                    name            = "name"
+                    value           = {values.name}
+                    handleChange    =  {handleChange}
+                    placeholder     = "Please enter name"
+                />
+            )}
+
                 <Input 
                     type            = "email"
                     name            = "email"
                     value           = {values.email}
-                    hangleChange    = {handleChange}  
+                    handleChange    = {handleChange}  
                     placeholder     = "Please enter email"
                 />
                 <Input 
@@ -76,17 +91,18 @@ const Login = () => {
             <button
                 type="submit"
                 className = "submit-btn"
+                disabled = {isLoading}
             >submit
             </button>
-            <div className = "register-login-div">
-                <p className = "register-login-message">
-                    {!values.isMember ? "Not a member yet?" : "Already a member?"}
+            <div className      = "register-login-div">
+                <p className    = "register-login-message">
+                    {values.isMember ? "Not a member?" : "Already a member?"}
                 </p>
                 <p
                     type="button"
-                    onClick={toggleMember}
-                    className = "register-login-btn"
-                >{values.isMember ? "login" : "register"}
+                    onClick     = {toggleMember}
+                    className   = "register-login-btn"
+                >{values.isMember ? "register" : "login"}
                 </p>
             </div>
     </form>

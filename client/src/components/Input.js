@@ -1,9 +1,9 @@
-
+import styled from "styled-components"
 
 const Input = (props) => {
 
     return (
-        <label>{props.name}
+        <Label>
             <input 
                 type = {props.type}
                 value={props.inputValue}
@@ -12,9 +12,20 @@ const Input = (props) => {
                 placeholder = {props.placeholder}
                 maxLength={props.maxLength}
                 className="todo-input"
+                
             />   
-        </label>
+        </Label>
     )
 }
+
+const Label = styled.label`
+    
+
+    input {
+        border-radius: 3px;
+        padding: 0.5rem;
+        font-size: 1.4rem;
+    }
+`
 
 export default Input

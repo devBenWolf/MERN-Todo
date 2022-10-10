@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import styled from 'styled-components';
 import darkImageMobile from "../images/bg-mobile-dark.jpg"
 import lightImageMobile from "../images/bg-mobile-light.jpg"
 import darkImageDesktop from "../images/bg-desktop-dark.jpg"
@@ -13,7 +14,7 @@ const Layout = ({children}) => {
 
     let currentImage = 0
 
-    if (size < 378 && themeBoolean === true) {
+    if (size < 500 && themeBoolean === true) {
       currentImage = darkImageMobile
     } else if (size < 378 && themeBoolean === true) {
       currentImage = lightImageMobile
@@ -28,24 +29,37 @@ const Layout = ({children}) => {
     const changeTheme = () => {
       setThemeBoolean(prevState => !prevState)
     }
-  
-
-      // Conditionally assign image to variable based on window size and theme
  
     
   return (
     <>
-    <header>
+    <Wrapper>
     <h4 style={{position: "absolute"}}>{size}</h4>
     <div className = "header-icon-div"><h2>TODO</h2> 
       <img className = "theme-icon" onClick={changeTheme} src={themeBoolean ? sunIcon : moonIcon} 
-      alt={themeBoolean ? "sun icon" : "moon icone"} />
+      alt={themeBoolean ? "sun icon" : "moon icon"} />
     </div>
     <img className = "background-image" src={currentImage} alt={themeBoolean ? "corridor of stone" : 'rocky mountains'} />
-    </header>
+    </Wrapper>
     {children}
     </>
   )
 }
 
 export default Layout
+
+export const Wrapper = styled.header`
+
+
+  @media(min-width: 800px) {
+    width: 50%;
+  }
+
+  .background-image {
+    @media(min-width: 800px) {
+    width: fit-content;
+    height: 12rem;
+    }
+  }
+
+`

@@ -7,7 +7,8 @@ import { GlobalStyles } from './globalStyles';
 import LoginContextProvider from './context/loginContext';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Login from './pages/Login';
-import Layout from './Layout/Layout';
+import Landing from "./pages/Landing"
+
 
 
 
@@ -16,11 +17,13 @@ root.render(
   <React.StrictMode>
     <GlobalStyles />
       <ThemeContextProvider>
-      <LoginContextProvider>
+      <LoginContextProvider> 
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} />
+          <Route path="/" element={<App />} >
+            <Route path="/login" element={<Login />} />
+          </Route>
+          <Route path="/landing" element = {<Landing />} />
         </Routes>
       </BrowserRouter>
       </LoginContextProvider>

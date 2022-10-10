@@ -97,4 +97,9 @@ input::placeholder {
     font-weight: bold;
 }
 
+.alert-success {
+    background-color: lightgreen;
+    color: darkgreen;
+}
+
 `
