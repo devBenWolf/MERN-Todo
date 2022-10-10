@@ -24,7 +24,23 @@ const register = async(req, res, next) => {
 }
 
 const login = async(req, res) => {
-    res.send(`login function`)
+    const {email, password} = req.body
+    if (!email || !password) {
+        throw new BadRequestError(`Please provide all values`)
+    }
+    const user = await User.findOne({email}).select("+password")
+    if (!user) {
+        throw new UnauthenticatedError(`Invalid Credentials`)
+    }
+    // user.comparePassword received from models/User.js
+    const isPasswordCorrect = await user.comparePassword(password)
+    if (!isPasswordCorrect) {
+        throw new UnauthenticatedError("Invalid Credentials")
+    }
+    const token = user.createJWT()
+
+    user.password = undefinedres.status(StatusCodes.OK).json({
+        user, token})
 }
 
 const updateUser = async(req, res) => {
