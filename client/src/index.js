@@ -1,33 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import ThemeContextProvider from './context/themeContext';
 import 'modern-normalize'
-import { GlobalStyles } from './globalStyles';
 import LoginContextProvider from './context/loginContext';
-import {BrowserRouter, Routes, Route} from "react-router-dom"
-import Login from './pages/Login';
-import Landing from "./pages/Landing"
-
+import ThemeContextProvider from "./context/themeContext"
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GlobalStyles />
-      <ThemeContextProvider>
-      <LoginContextProvider> 
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} >
-            <Route path="/login" element={<Login />} />
-          </Route>
-          <Route path="/landing" element = {<Landing />} />
-        </Routes>
-      </BrowserRouter>
-      </LoginContextProvider>
-      </ThemeContextProvider>
+  <ThemeContextProvider>
+  <LoginContextProvider>
+    <App />
+  </LoginContextProvider>
+  </ThemeContextProvider>
   </React.StrictMode>
 );
 

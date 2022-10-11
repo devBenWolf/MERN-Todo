@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import {Outlet} from "react-router-dom"
 import styled from 'styled-components';
 import darkImageMobile from "../images/bg-mobile-dark.jpg"
 import lightImageMobile from "../images/bg-mobile-light.jpg"
@@ -8,7 +9,7 @@ import sunIcon from "../images/icon-sun.svg"
 import moonIcon from "../images/icon-moon.svg"
 import { ThemeContext } from '../context/themeContext';
 
-const Layout = ({children}) => {
+const Header = ({children}) => {
 
     const {themeBoolean, setThemeBoolean, size} = useContext(ThemeContext)
 
@@ -41,12 +42,13 @@ const Layout = ({children}) => {
     </div>
     <img className = "background-image" src={currentImage} alt={themeBoolean ? "corridor of stone" : 'rocky mountains'} />
     </Wrapper>
+    <Outlet />
     {children}
     </>
   )
 }
 
-export default Layout
+export default Header
 
 export const Wrapper = styled.header`
 
