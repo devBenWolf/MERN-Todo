@@ -30,9 +30,7 @@ if (action.type === DISPLAY_ALERT) {
         ...state,
         isLoading: false,
         user: action.payload.user,
-        token: action.payload.token,
-        userLocation: action.payload.location,
-        jobLocation: action.payload.location,           
+        token: action.payload.token,        
         showAlert: true,
         alertType: "success",
         alertText: action.payload.alertText
