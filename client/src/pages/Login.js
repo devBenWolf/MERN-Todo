@@ -56,7 +56,7 @@ const Login = () => {
     }
 
 
-
+    console.log(user)
   return (
     <Wrapper>
     <form onSubmit = {handleSubmit}>  
