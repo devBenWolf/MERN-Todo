@@ -20,7 +20,13 @@ const register = async(req, res, next) => {
     const token = user.createJWT()
 
     // Cannot restrict what is sent back in response due to User.create(). This is a hardcoded workaround to receive only email, name and token:
-    res.status(StatusCodes.CREATED).json({ user: {email: user.email, name: user.name}, token })
+    res.status(StatusCodes.CREATED).json({ 
+        user: {
+            email: user.email, 
+            name: user.name
+        }, 
+        token 
+    })
 }
 
 const login = async(req, res) => {
@@ -39,8 +45,11 @@ const login = async(req, res) => {
     }
     const token = user.createJWT()
 
-    user.password = undefinedres.status(StatusCodes.OK).json({
-        user, token})
+    user.password = undefined
+    res.status(StatusCodes.OK).json({
+        user, 
+        token
+    })
 }
 
 const updateUser = async(req, res) => {
