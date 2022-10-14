@@ -73,7 +73,7 @@ const LoginContextProvider = ({children}) => {
                 payload: { msg: error.response.data.msg },
               })
         }
-            clearAlert()      
+        clearAlert()      
     }
 
     const logoutUser = () => {
